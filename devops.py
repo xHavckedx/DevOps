@@ -11,6 +11,7 @@ parser.add_argument("-f", "--file", dest = "html", help = "Archivo html con el c
 parser.add_argument("-e", "--env", dest = "entorno", help = "entorno")
 parser.add_argument("-a", "--account-service", dest = "account", help = "account service")
 parser.add_argument("-t", "--topics", dest = "topics", help = "topics")
+parser.add_argument("-o", "--operations", dest = "operations", help = "operations")
 args = parser.parse_args()
 arg1 = sys.argv[1]
 if arg1 == 'restart': #args.opcion == 'restart':
@@ -29,6 +30,6 @@ elif arg1 == 'confluent':
     topics = args.topics.split(',')
     print(f'Imprimiendo la lista de topicos: {topics}')
     for t in topics:
-      os.system(f"confluent kafka acl create --allow --service-account {args.account} --operations read,describe --prefix --topic {t}")
-      print(f"confluent kafka acl create --allow --service-account {args.account} --operations read,describe --prefix --topic {t}")
+      os.system(f"confluent kafka acl create --allow --service-account {args.account} --operations {args.operations} --prefix --topic {t}")
+      print(f"confluent kafka acl create --allow --service-account {args.account} --operations {args.operations} --prefix --topic {t}")
 exit()
