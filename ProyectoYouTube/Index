@@ -1,0 +1,20 @@
+1. Linux
+    1.1 Instalación de WSL y explicación
+    1.2 Manejo de la shell, Funciones básicas del sistema.
+2. GIT
+    2.1 Conectando a un repositorio de código
+    2.2 Subiendo nuestra primera subida
+    2.3 Configuraciones y credential helper
+    2.4 Algunas características de GIT
+    2.5 Flujos de GIT
+3. Docker
+    3.1 Que es docker y para que sirve?
+    3.2 Poniendo en práctica la capacidad de docker
+    3.3 Detalles a tener en cuenta de docker
+4. SQL y SQLite
+    4.1 Sentencias SQL
+    4.2 Sentencias SQLite
+5. Desarrollo con Python
+    5.1 Programación básica
+    5.2 POO con Python
+    5.3 DJango, creando un microservicio
