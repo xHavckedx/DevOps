@@ -29,6 +29,8 @@ elif arg1 == 'confluent':
   if len(sys.argv) >= 2:
     topics = args.topics.split(',')
     print(f'Imprimiendo la lista de topicos: {topics}')
+    os.system(f"confluent login --save")
+    os.system(f"confluent environment use env-gq128r")
     for t in topics:
       os.system(f"confluent kafka acl create --allow --service-account {args.account} --operations {args.operations} --prefix --topic {t}")
       print(f"confluent kafka acl create --allow --service-account {args.account} --operations {args.operations} --prefix --topic {t}")
