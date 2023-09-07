@@ -33,5 +33,6 @@ elif arg1 == 'confluent':
     os.system(f"confluent environment use env-gq128r")
     for t in topics:
       os.system(f"confluent kafka acl create --allow --service-account {args.account} --operations {args.operations} --prefix --topic {t}")
-      print(f"confluent kafka acl create --allow --service-account {args.account} --operations {args.operations} --prefix --topic {t}")
+      print("***************************************")
+      #print(f"confluent kafka acl create --allow --service-account {args.account} --operations {args.operations} --prefix --topic {t}")
 exit()
