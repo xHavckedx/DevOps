@@ -1,20 +1,33 @@
 1. Linux
     1.1 Instalación de WSL y explicación
     1.2 Manejo de la shell, Funciones básicas del sistema.
+    1.2.1 Comandos cd, ls, mkdir, touch, rm, chmod, chown, pwd, cat, grep
 2. GIT
-    2.1 Conectando a un repositorio de código
-    2.2 Subiendo nuestra primera subida
+    2.1 Conectando a un repositorio de código (claves ssh)
+    2.2 Subiendo nuestra primera subida de  código (add, commit, push)
     2.3 Configuraciones y credential helper
     2.4 Algunas características de GIT
+    2.4.1 branch, log, reflog, revert, reset, diff, pull, stash
     2.5 Flujos de GIT
+    2.5.1 Gitflow, Github, Gitlab, MasterOnlyFlow
 3. Docker
     3.1 Que es docker y para que sirve?
     3.2 Poniendo en práctica la capacidad de docker
     3.3 Detalles a tener en cuenta de docker
+    3.4 Comandos de docker
+    3.4.1 run, images, ps, volume, start, delete
+    3.5 Manifiestos Dockerfile
+    3.6 Docker compose
 4. SQL y SQLite
-    4.1 Sentencias SQL
-    4.2 Sentencias SQLite
+    4.1 Que es SQL, diferencia entre bases de datos relaciones y Oreintadas a objetos.
+    4.2 Sentencias SQL
+    4.3 Sentencias SQLite
 5. Desarrollo con Python
+    5.0 Que es un IDE para que sirve y como usarlo (Visual studio)
     5.1 Programación básica
     5.2 POO con Python
     5.3 DJango, creando un microservicio
+6. Desglose final
+    6.1 Felicidades ya puedes empezar a buscar trabajo
+    6.2 Tips para encontrar trabajo
+    6.3 Mejora del currículum o venderte en internet (portfolio).
