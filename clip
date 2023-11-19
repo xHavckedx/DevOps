@@ -1,0 +1,18 @@
+#!/bin/bash
+#definicion de variables
+linea=$1
+argumento=$2
+copyorpaste=$3
+
+if [ -z $linea ];
+then
+	cat ~/secrets/pwd | awk "{print \$1}"
+
+elif [ -z $copyorpaste ];
+then
+	cat ~/secrets/pwd | awk "NR==$linea{print \$$argumento}" | xclip -sel clip
+	cat ~/secrets/pwd | awk "NR==$linea{print \$1}"
+else	
+	cat ~/secrets/pwd | awk "NR==$linea{print \$$argumento}" | xclip -sel clip
+	cat ~/secrets/pwd | awk "NR==$linea{print \$$argumento}" | xclip -sel clip -o
+fi
