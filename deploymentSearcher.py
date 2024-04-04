@@ -25,7 +25,7 @@ else:
             # Verifica si el archivo es un archivo regular (no un directorio)
             if os.path.isfile(ruta_archivo):
                 # Lee el contenido del archivo
-                with open(ruta_archivo, 'r') as archivo:
+                with open(ruta_archivo, 'r', encoding='utf-8') as archivo:
                     contenido = archivo.read()
                     
                     # Verifica si el patrón está en el contenido del archivo
