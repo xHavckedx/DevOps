@@ -2,7 +2,7 @@
 
 def make(deployment, metrics_path, healthcheck_path, service_port, global_configmap, configmap, image_name, image_version,secret):
     with open(f"./{deployment}/{deployment}-deployment.yaml", "w") as f:
-            f.write(
+        f.write(
     f"""---
 apiVersion: apps/v1
 kind: Deployment
@@ -76,13 +76,13 @@ spec:
         - configMapRef:
           name: kafka-global-config
         - configMapRef:
-          name: mongodb-global-config {"\n        " if configmap or secret else ''}""" if global_configmap else ''}{f"""- secretRef:
-          name: {deployment}-secret {"\n        " if configmap or healthcheck_path else ''}""" if secret else ''}{f"""volumeMounts:
+          name: mongodb-global-config {"\n        " if (configmap or secret) else ''}""" if global_configmap else ''}{f"""- secretRef:
+          name: {deployment}-secret {"\n        " if (configmap or healthcheck_path) else ''}""" if secret else ''}{f"""volumeMounts:
         - name: config
           mountPath: \"/opt/ctt/config\"
           readOnly: true {"\n        " if healthcheck_path else ''}""" if configmap else ''}{f"""startupProbe:
           httpGet:
-            path: {healthcheck_path}
+            path: {healthcheck_path} 
             port: app
           initialDelaySeconds: 30
           periodSeconds: 60
