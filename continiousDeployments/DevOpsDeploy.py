@@ -73,13 +73,13 @@ def main():
     parser.add_argument("-i", "--image-name", help="Nombre de la imagen", required=True)
     parser.add_argument("-v", "--image-version", help="Versión de la imagen", required=True)
     parser.add_argument("-p", "--service-port", help="Puerto del servicio", required=True, type=int)
-    parser.add_argument("-e", "--environment", help="Entorno donde se desplegará [stg,pro]", required=True)
+    parser.add_argument("-e", "--environment", help="Entorno donde se desplegará [stg,pro]", choices=['stg', 'pro'], required=True)
     parser.add_argument("-gc", "--global-configmap", help="ConfigMap global", action="store_true")
     parser.add_argument("-m", "--metrics-path", help="Ruta de las métricas")
     parser.add_argument("-H", "--healthcheck-path", help="Ruta del healthcheck")
     parser.add_argument("-c", "--configmap", help="ConfigMap(application.properties)", action="store_true")
     parser.add_argument("-s", "--secret", help="External secret", action="store_true")
-    parser.add_argument("-I", "--ingress", help="Tipo de ingress [int,pub,both]")
+    parser.add_argument("-I", "--ingress", help="Tipo de ingress [int,pub,both]", choices=['int', 'pub', 'both'])
     parser.add_argument("-o", "--outbox", help="Si contiene outbox o no", action="store_true")
     parser.epilog = """Ejemplo de uso:
     
