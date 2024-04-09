@@ -1,6 +1,6 @@
 #TODO Falta agregar scrape de metricas con prometheus, seleccionar una flag si quiero instrumentación o no y generar el archivo opentelemtry y carpeta monitoring
 
-def make(deployment, metrics_path, healthcheck_path, service_port, global_configmap, configmap, image_name, image_version,secret):
+def make(deployment, metrics_path, healthcheck_path, service_port, global_configmap, configmap, image_name, image_version, secret, outbox, environment):
     with open(f"./{deployment}/{deployment}-deployment.yaml", "w") as f:
         f.write(
     f"""---
@@ -95,6 +95,52 @@ spec:
           failureThreshold: 1
           periodSeconds: 20
           timeoutSeconds: 5 """ if healthcheck_path else ''}
+      {f"""- name: outbox-sidecar
+        image: {f"""232430620857.dkr.ecr.eu-west-1.amazonaws.com""" if environment == 'stg' else '339394754229.dkr.ecr.eu-central-1.amazonaws.com'}/shein-notifications-sidecar:latest
+        envFrom:
+        - configMapRef:
+            name: mongodb-global-config
+        - secretRef:
+            name: external-secret-mongodb
+        - secretRef:
+            name: external-secret-outbox
+        env:
+        - name: ASPNETCORE_URLS
+          value: "http://*:3001"
+        - name: MONGODB_USERNAME
+          value: "$(MONGO_DB_USER)"
+        - name: MONGODB_PASSWORD
+          value: "$(MONGO_DB_PASSWORD)"
+        - name: MONGODB_DATABASE
+          value: "$(MONGO_DB_DATABASE)"
+        - name: MONGODB_URI
+          value: "$(MONGO_DB_HOST1)"
+        ports:
+        - name: outbox
+          containerPort: 3001
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 50m
+            memory: 200Mi
+          limits:
+            cpu: 200m
+            memory: 600Mi
+        startupProbe:
+          httpGet:
+            path: /health
+            port: outbox
+          initialDelaySeconds: 30
+          periodSeconds: 60
+          failureThreshold: 30
+          timeoutSeconds: 60
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: outbox
+          failureThreshold: 1
+          periodSeconds: 20
+          timeoutSeconds: 5""" if outbox else ''}\
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
