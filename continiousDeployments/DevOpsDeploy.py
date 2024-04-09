@@ -14,10 +14,10 @@ import Secret
 
 args = {}
 
-def generate_manifests(deployment, metrics_path, healthcheck_path, service_port, global_configmap, configmap, secret, image_name, image_version, environment, ingress_type): 
+def generate_manifests(deployment, metrics_path, healthcheck_path, service_port, global_configmap, configmap, secret, image_name, image_version, environment, ingress_type, outbox): 
   try:
     # Generar el manifiesto del deployment
-    Deployment.make(deployment, metrics_path, healthcheck_path, service_port, global_configmap, configmap, image_name, image_version, secret)
+    Deployment.make(deployment, metrics_path, healthcheck_path, service_port, global_configmap, configmap, image_name, image_version, secret, outbox, environment)
 
     # Generar el manifiesto del Service
     Service.make(deployment, service_port)
@@ -78,11 +78,12 @@ def main():
     parser.add_argument("-m", "--metrics-path", help="Ruta de las métricas")
     parser.add_argument("-H", "--healthcheck-path", help="Ruta del healthcheck")
     parser.add_argument("-c", "--configmap", help="ConfigMap(application.properties)", action="store_true")
-    parser.add_argument("-s", "--secret", help="Extenral secret", action="store_true")
+    parser.add_argument("-s", "--secret", help="External secret", action="store_true")
     parser.add_argument("-I", "--ingress", help="Tipo de ingress [int,pub,both]")
+    parser.add_argument("-o", "--outbox", help="Si contiene outbox o no", action="store_true")
     parser.epilog = """Ejemplo de uso:
     
-    python3 script.py -d my-image -i url/my-image -v 1.0 -p 8080 -e pro -gc -m /metrics -H /healthcheck -c -s -I both 
+    python3 script.py -d my-image -i url/my-image -v 1.0 -p 8080 -e pro -gc -m /metrics -H /healthcheck -c -s -I both -o
     """
     args = parser.parse_args()
     #setArgs(args)
@@ -91,7 +92,7 @@ def main():
         mkdir(args.deployment)
         print(f"Directorio '{args.deployment}' creado exitosamente.")
         # Generar manifiestos
-        generate_manifests(args.deployment, args.metrics_path, args.healthcheck_path, args.service_port, args.global_configmap, args.configmap, args.secret, args.image_name, args.image_version, args.environment, args.ingress)
+        generate_manifests(args.deployment, args.metrics_path, args.healthcheck_path, args.service_port, args.global_configmap, args.configmap, args.secret, args.image_name, args.image_version, args.environment, args.ingress, args.outbox)
     except FileExistsError:
         print(f"El directorio '{args.deployment}' ya existe.")
     except Exception as e:
