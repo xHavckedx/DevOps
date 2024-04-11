@@ -53,7 +53,7 @@ def generate_manifests(deployment, metrics_path, healthcheck_path, service_port,
       IngressExternal.make(deployment, healthcheck_path, service_port, environment)
       IngressInternal.make(deployment, healthcheck_path, service_port, environment)
       
-    Monitoring.make()
+    Monitoring.init(deployment, environment)
     
     print("Manifiestos generados correctamente.")
   except Exception:
