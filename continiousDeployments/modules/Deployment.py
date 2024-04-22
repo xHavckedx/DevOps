@@ -60,6 +60,27 @@ def generate_deployment_manifest(args):
             limits:
               cpu: 1000m
               memory: 2Gi
+            env:
+              - name: MY_CPU_REQUEST
+                valueFrom:
+                  resourceFieldRef:
+                    containerName: {args.deployment}
+                    resource: requests.cpu
+              - name: MY_CPU_LIMIT
+                valueFrom:
+                  resourceFieldRef:
+                    containerName: {args.deployment}
+                    resource: limits.cpu
+              - name: MY_MEM_REQUEST
+                valueFrom:
+                  resourceFieldRef:
+                    containerName: {args.deployment}
+                    resource: requests.memory
+              - name: MY_MEM_LIMIT
+                valueFrom:
+                  resourceFieldRef:
+                    containerName: {args.deployment}
+                    resource: limits.memory
             ports:
               - name: app
                 containerPort: {args.service_port}
