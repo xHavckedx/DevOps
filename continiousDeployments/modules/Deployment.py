@@ -170,7 +170,7 @@ def generate_liveness_probe(args):
     return livenessProbe if args.healthcheck_path else ''
 def generate_outbox_sidecar(args):
     outbox = f"""- name: outbox-sidecar
-            image: {f"""232430620857.dkr.ecr.eu-west-1.amazonaws.com""" if args.environment == 'stg' else '339394754229.dkr.ecr.eu-central-1.amazonaws.com'}/shein-notifications-sidecar:latest
+            image: {"232430620857.dkr.ecr.eu-west-1.amazonaws.com" if args.environment == 'stg' else '339394754229.dkr.ecr.eu-central-1.amazonaws.com'}/shein-notifications-sidecar:latest
             envFrom:
             - configMapRef:
                 name: mongodb-global-config

@@ -48,7 +48,7 @@ def test_generate_manifests_success(mock_args, mock_print, mock_monitoring_init,
                                    mock_ingress_internal_make, mock_horizontal_pod_auto_scaler_make,
                                    mock_kustomization_make, mock_pod_disruption_badget_make, mock_namespace_make,
                                    mock_secret_make, mock_configmap_make, mock_service_make, mock_deployment_make):
-    mock_args.return_value = MagicMock(deployment='test', configmap=True, secret=True, ingress='both')
+    mock_args.return_value = MagicMopopck(deployment='test', configmap=True, secret=True, ingress='both')
     main()
     mock_deployment_make.assert_called_once_with(mock_args)
     mock_service_make.assert_called_once_with(mock_args)

@@ -10,7 +10,7 @@ metadata:
     # Do not scrape (auth is required) we use manifest-file-ingress-int to monitor it
     prometheus.io/scrape: "true"
     prometheus.io/scheme: "https"
-    prometheus.io/path: /{deployment}{healthcheck_path}
+    prometheus.io/path: /{deployment}/{healthcheck_path}
     nginx.ingress.kubernetes.io/proxy-body-size: 10m
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /$1
